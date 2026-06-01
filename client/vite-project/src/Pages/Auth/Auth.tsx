@@ -7,8 +7,10 @@ import Stack from "@mui/material/Stack";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 
 import styles from "./styles.module.scss";
+import { logo_text } from "./content";
 
 import logo from "../../assets/images/logo.png";
 
@@ -28,23 +30,21 @@ function Auth() {
 
   return (
     <Box className={styles.auth_page_wrapper}>
-      <Box component="img" src={logo} width={"50%"}></Box>
+      <Box component="div" className={styles.logo_headline}>
+        <Box component="img" src={logo} width={"100%"}></Box>
+        <Typography className={styles.misc_text} sx={{ fontSize: "24px", marginBottom: "1em" }}>{logo_text.logo_heading}</Typography>
+        <Typography className={styles.misc_text} sx={{ fontSize: "20px" }}>{logo_text.logo_description}</Typography>
+      </Box>
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
         className={styles.auth_page_wrapper_form}
       >
         <Box className={styles.form_buttons}>
-          <Button
-            variant="text"
-            className={styles.button}
-          >
+          <Button variant="text" className={styles.button}>
             Log in
           </Button>
-          <Button
-            variant="text"
-            className={styles.button}
-          >
+          <Button variant="text" className={styles.button}>
             Sign up
           </Button>
         </Box>
@@ -83,10 +83,22 @@ function Auth() {
           {errors.password && (
             <Typography component="span">Password is required</Typography>
           )}
-          <Typography component="span" className={styles.misc_text}> Forgot your password?</Typography>
+          <Typography component="span" className={styles.misc_text}>
+            {" "}
+            Forgot your password?
+          </Typography>
           <Button type="submit" className={styles.auth_button}>
             Log in
           </Button>
+          <Divider>
+            <Typography className={styles.misc_text}>
+              Don't have an account?
+              <Typography component="span" sx={{ fontWeight: "bold" }}>
+                {" "}
+                Sign up
+              </Typography>
+            </Typography>
+          </Divider>
         </Stack>
       </Box>
     </Box>

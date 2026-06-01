@@ -1,28 +1,37 @@
-@use "../../defaults";
+@use "../../_defaults";
+
+.misc_text {
+  color: #5a6b34;
+  font-family: defaults.$mainFont;
+
+}
 
 .auth_page_wrapper {
-  @include defaults.displayFlex(flex, space-around, center, row, no-wrap);
+  @include defaults.displayFlex(flex, space-evenly, center, row, nowrap);
+  font-family: defaults.$mainFont;
   width: 100%;
   height: 100vh;
   background-image: url("./images/auth_bg.png");
   .auth_page_wrapper_form {
+    font-family: defaults.$mainFont;
     background-color: #fafafa;
     border-radius: 10px;
     width: 35%;
     padding: 2em;
     text-align: center;
-    .misc_text {
-        color: #5a6b34;
-    }
   }
+  .logo_headline {
+    width: 33%;
+    text-align: center
+}
   .form_buttons {
-    @include defaults.displayFlex(flex, space-around, center, 0, 0);
+    @include defaults.displayFlex(flex, space-around, center, row, nowrap);
     margin-bottom: 2em;
-    font-family: sans-serif;
+    font-family: defaults.$mainFont;
     .button {
       text-decoration: underline;
       color: #5a6b34;
-      font-family: sans-serif;
+      font-family: defaults.$mainFont;
       font-size: 24px;
     }
   }
@@ -31,5 +40,6 @@
     color: #fff;
     padding: 15px;
     font-weight: bold;
+    font-family: defaults.$mainFont;
   }
 }
