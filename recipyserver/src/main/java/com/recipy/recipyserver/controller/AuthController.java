@@ -11,8 +11,8 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    @PostMapping("/register")
+    @PostMapping("/login")
     public String register(@Valid @RequestBody RegisterRequest request) {
-        return "User succesfully registered";
+        return "User has succefully logged in";
     }
 }
