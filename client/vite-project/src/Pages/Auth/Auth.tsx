@@ -9,6 +9,8 @@ import LockIcon from "@mui/icons-material/Lock";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
+import { useAuthStore } from "../../store/authStore";
+
 import styles from "./styles.module.scss";
 import { logo_text } from "./content";
 
@@ -20,20 +22,28 @@ type Inputs = {
 };
 
 function Auth() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const login = useAuthStore((state) => state.login);
+  const error = useAuthStore((state) => state.error);
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const { register, handleSubmit } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    await login(data);
+  };
 
   return (
     <Box className={styles.auth_page_wrapper}>
       <Box component="div" className={styles.logo_headline}>
         <Box component="img" src={logo} width={"100%"}></Box>
-        <Typography className={styles.misc_text} sx={{ fontSize: "24px", marginBottom: "1em" }}>{logo_text.logo_heading}</Typography>
-        <Typography className={styles.misc_text} sx={{ fontSize: "20px" }}>{logo_text.logo_description}</Typography>
+        <Typography
+          className={styles.misc_text}
+          sx={{ fontSize: "24px", marginBottom: "1em" }}
+        >
+          {logo_text.logo_heading}
+        </Typography>
+        <Typography className={styles.misc_text} sx={{ fontSize: "20px" }}>
+          {logo_text.logo_description}
+        </Typography>
       </Box>
       <Box
         component="form"
@@ -61,12 +71,8 @@ function Auth() {
                 </Typography>
               </Box>
             }
-            placeholder="Enter your username or email"
             {...register("username", { required: true })}
           />
-          {errors.username && (
-            <Typography component="span">Username is required</Typography>
-          )}
           <TextField
             id="outline-required"
             label={
@@ -77,11 +83,12 @@ function Auth() {
                 <Typography component="span">Enter your password</Typography>
               </Box>
             }
-            placeholder="Enter your password"
             {...register("password", { required: true })}
           />
-          {errors.password && (
-            <Typography component="span">Password is required</Typography>
+          {error && (
+            <Typography component="span" sx={{color: "red"}}>
+              {error}
+            </Typography>
           )}
           <Typography component="span" className={styles.misc_text}>
             {" "}
